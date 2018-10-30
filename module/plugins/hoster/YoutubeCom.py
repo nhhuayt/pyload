@@ -206,12 +206,12 @@ class Ffmpeg(object):
 class YoutubeCom(Hoster):
     __name__ = "YoutubeCom"
     __type__ = "hoster"
-    __version__ = "0.68"
+    __version__ = "0.69"
     __status__ = "testing"
 
     __pattern__ = r'https?://(?:[^/]*\.)?(?:youtu\.be/|youtube\.com/watch\?(?:.*&)?v=)[\w\-]+'
     __config__ = [("activated", "bool", "Activated", True),
-                  ("quality", "sd;hd;fullhd;240p;360p;480p;720p;1080p;1440p;2160p;3072p;4320p", "Quality Setting", "hd"),
+                  ("quality", "sd;hd;fullhd;240p;360p;480p;720p;720p60;1080p;1080p60;1440p;1440p60;2160p;2160p60;3072p", "Quality Setting", "f"),
                   ("vfmt", "int", "Video FMT/ITAG Number (0 for auto)", 0),
                   ("afmt", "int", "Audio FMT/ITAG Number (0 for auto)", 0),
                   (".mp4", "bool", "Allow .mp4", True),
@@ -253,16 +253,22 @@ class YoutubeCom(Hoster):
         35: {'ext': ".flv", 'width': 854, 'height': 480, 'qi': 6, '3d': False, 'type': "av"},
         # mp4
         83: {'ext': ".mp4", 'width': 400, 'height': 240, 'qi': 1, '3d': True, 'type': "av"},
+        133: {'ext': ".mp4", 'width': 400, 'height': 240, 'qi': 1, '3d': F, 'type': "av"},
         18: {'ext': ".mp4", 'width': 480, 'height': 360, 'qi': 2, '3d': False, 'type': "av"},
         82: {'ext': ".mp4", 'width': 640, 'height': 360, 'qi': 3, '3d': True, 'type': "av"},
+        83: {'ext': ".mp4", 'width': 854, 'height': 480, 'qi': 5, '3d': True, 'type': "av"},
+        135: {'ext': ".mp4", 'width': 854, 'height': 480, 'qi': 5, '3d': False, 'type': "v"},
         22: {'ext': ".mp4", 'width': 1280, 'height': 720, 'qi': 8, '3d': False, 'type': "av"},
         136: {'ext': ".mp4", 'width': 1280, 'height': 720, 'qi': 8, '3d': False, 'type': "v"},
+        298: {'ext': ".mp4", 'width': 1280, 'height': 720, 'qi': 8, '3d': False, 'type': "v"},
         84: {'ext': ".mp4", 'width': 1280, 'height': 720, 'qi': 8, '3d': True, 'type': "av"},
         37: {'ext': ".mp4", 'width': 1920, 'height': 1080, 'qi': 9, '3d': False, 'type': "av"},
         137: {'ext': ".mp4", 'width': 1920, 'height': 1080, 'qi': 9, '3d': False, 'type': "v"},
+        299: {'ext': ".mp4", 'width': 1920, 'height': 1080, 'qi': 9, '3d': False, 'type': "v"},
         85: {'ext': ".mp4", 'width': 1920, 'height': 1080, 'qi': 9, '3d': True, 'type': "av"},
         264: {'ext': ".mp4", 'width': 2560, 'height': 1440, 'qi': 10, '3d': False, 'type': "v"},
-        266: {'ext': ".mp4", 'width': 3840, 'height': 2160, 'qi': 11, '3d': False, 'type': "v"},
+        138: {'ext': ".mp4", 'width': 3840, 'height': 2160, 'qi': 11, '3d': False, 'type': "v"},
+	266: {'ext': ".mp4", 'width': 3840, 'height': 2160, 'qi': 11, '3d': False, 'type': "v"},
         38: {'ext': ".mp4", 'width': 4096, 'height': 3072, 'qi': 12 , '3d': False, 'type': "av"},
         # webm
         43: {'ext': ".webm", 'width': 640, 'height': 360, 'qi': 3, '3d': False, 'type': "av"},
@@ -273,9 +279,16 @@ class YoutubeCom(Hoster):
         247: {'ext': ".webm", 'width': 1280, 'height': 720, 'qi': 7, '3d': False, 'type': "v"},
         102: {'ext': ".webm", 'width': 1280, 'height': 720, 'qi': 8, '3d': True, 'type': "av"},
         46: {'ext': ".webm", 'width': 1920, 'height': 1080, 'qi': 9, '3d': False, 'type': "av"},
+        169: {'ext': ".webm", 'width': 1920, 'height': 1080, 'qi': 9, '3d': False, 'type': "v"},
         248: {'ext': ".webm", 'width': 1920, 'height': 1080, 'qi': 9, '3d': False, 'type': "v"},
+        303: {'ext': ".webm", 'width': 1920, 'height': 1080, 'qi': 9, '3d': False, 'type': "v"},
+        335: {'ext': ".webm", 'width': 1920, 'height': 1080, 'qi': 9, '3d': False, 'type': "v"},
         271: {'ext': ".webm", 'width': 2560, 'height': 1440, 'qi': 10, '3d': False, 'type': "v"},
+        308: {'ext': ".webm", 'width': 2560, 'height': 1440, 'qi': 10, '3d': False, 'type': "v"},
+        336: {'ext': ".webm", 'width': 2560, 'height': 1440, 'qi': 10, '3d': False, 'type': "v"},
         313: {'ext': ".webm", 'width': 3840, 'height': 2160, 'qi': 11, '3d': False, 'type': "v"},
+        315: {'ext': ".webm", 'width': 3840, 'height': 2160, 'qi': 11, '3d': False, 'type': "v"},
+        337: {'ext': ".webm", 'width': 3840, 'height': 2160, 'qi': 11, '3d': False, 'type': "v"},
         272: {'ext': ".webm", 'width': 7680, 'height': 4320, 'qi': 13, '3d': False, 'type': "v"},
         # audio
         139: {'ext': ".mp4", 'qi': 1, 'acodec': "aac", 'type': "a"},
@@ -364,11 +377,11 @@ class YoutubeCom(Hoster):
         use3d = self.config.get('3d')
 
         if use3d:
-            quality = {'sd': 82, 'hd': 84, 'fullhd': 85, '240p': 83, '360p': 82, '480p': 82, '720p': 84,
-                       '1080p': 85, '1440p': 85, '2160p': 85, '3072p': 85, '4320p': 85}
+            quality = {'sd': 82, 'hd': 84, 'fullhd': 85, '240p': 83, '360p': 82, '480p': 83, '720p': 84, '720p60': 84,
+                       '1080p': 85, '1080p60': 85,'1440p': 85, '1440p60': 85, '2160p': 85, '2160p60': 85, '3072p': 85, '4320p': 85}
         else:
-            quality = {'sd': 18, 'hd': 22, 'fullhd': 37, '240p': 5, '360p': 18, '480p': 35, '720p': 22,
-                       '1080p': 37, '1440p': 264, '2160p': 266, '3072p': 38, '4320p': 272}
+            quality = {'sd': 18, 'hd': 22, 'fullhd': 37, '240p': 5, '360p': 18, '480p': 35, '720p': 22, '720p60': 298,
+                       '1080p': 37, '1080p60': 299, '1440p': 264, '1440p60': 264, '2160p': 138, '2160p60': 266, '3072p': 38, '4320p': 272}
 
         desired_fmt = self.config.get('vfmt') or quality.get(self.config.get('quality'), 0)
 
